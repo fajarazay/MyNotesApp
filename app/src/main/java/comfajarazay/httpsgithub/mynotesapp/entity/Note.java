@@ -1,7 +1,14 @@
 package comfajarazay.httpsgithub.mynotesapp.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import comfajarazay.httpsgithub.mynotesapp.db.DatabaseContract;
+
+import static android.provider.BaseColumns._ID;
+import static comfajarazay.httpsgithub.mynotesapp.db.DatabaseContract.getColumnInt;
+import static comfajarazay.httpsgithub.mynotesapp.db.DatabaseContract.getColumnString;
 
 /**
  * Created by FAJAR SEPTIAN on 2018-05-15.
@@ -84,4 +91,12 @@ public class Note implements Parcelable{
     public void setDate(String date) {
         this.date = date;
     }
+
+    public Note(Cursor cursor){
+        this.id = getColumnInt(cursor, _ID);
+        this.title = getColumnString(cursor, DatabaseContract.NoteColumns.TITLE);
+        this.description = getColumnString(cursor, DatabaseContract.NoteColumns.DESCRIPTION);
+        this.date = getColumnString(cursor, DatabaseContract.NoteColumns.DATE);
+    }
+
 }
